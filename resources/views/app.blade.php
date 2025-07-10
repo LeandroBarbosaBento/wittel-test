@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Vue SPA</title>
-    @vite('resources/js/main.js')
+    @vite(['resources/js/main.js', 'resources/css/app.css'])
 </head>
 <body>
     <div id="app"></div>
