@@ -27,21 +27,13 @@
             </form>
         </div>
 
-        <div v-if="customers.length" class="bg-white rounded shadow divide-y p-2">
-            <div
+        <div v-if="customers.length">
+            <customer-card
                 v-for="(customer, index) in customers"
                 :key="index"
-                class="p-4 flex justify-between items-center"
-            >
-                <div>
-                    <p class="font-semibold">{{ customer.name }}</p>
-                    <p class="text-sm text-gray-600">CPF: {{ customer.cpf }}</p>
-                </div>
-                <div class="text-sm text-gray-500">
-                    Registered: {{ customer.registeredAt }}
-                </div>
-            </div>
-            <Pagination
+                :customer="customer"
+            />
+            <pagination
                 @update:modelValue="onChangePage"
                 :model-value="1"
                 :total-pages="10"
@@ -63,6 +55,7 @@
 import { ref } from 'vue';
 import Modal from '../components/Modal.vue';
 import Pagination from '../components/Pagination.vue';
+import CustomerCard from '../components/CustomerCard.vue';
 
 const showModal = ref(false);
 const searchTerm = ref("");
@@ -70,22 +63,26 @@ const customers = ref([
     {
         name: "Nome do cliente",
         cpf: "123456",
-        registeredAt: "10/06/2025"
+        registeredAt: "10/06/2025",
+        household_income: 980,
     },
     {
         name: "Nome do cliente",
         cpf: "123456",
-        registeredAt: "10/06/2025"
+        registeredAt: "10/06/2025",
+        household_income: 1000
     },
     {
         name: "Nome do cliente",
         cpf: "123456",
-        registeredAt: "10/06/2025"
+        registeredAt: "10/06/2025",
+        household_income: 3000
     },
     {
         name: "Nome do cliente",
         cpf: "123456",
-        registeredAt: "10/06/2025"
+        registeredAt: "10/06/2025",
+        household_income: 4000
     }
 ]);
 
