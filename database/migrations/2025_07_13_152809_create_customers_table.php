@@ -17,9 +17,7 @@ return new class extends Migration
             $table->string('name', 150);
             $table->string('cpf', 11)->unique();
             $table->date('birth_date');
-            $table->timestamp('registered_at')->useCurrent();
             $table->decimal('household_income', 10, 2)->nullable();
-
             $table->timestamps();
         });
     }
