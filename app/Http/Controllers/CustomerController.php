@@ -6,6 +6,7 @@ use App\Http\Requests\CreateCustomerRequest;
 use App\Models\Customer;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
+use App\Http\Resources\CustomerResource;
 
 class CustomerController extends Controller
 {
@@ -14,7 +15,15 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $search = request('search');
+
+        $customers = Customer::query()
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })
+            ->paginate(10);
+
+        return CustomerResource::collection($customers);
     }
 
     /**
