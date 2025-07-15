@@ -32,14 +32,14 @@ class CreateCustomerRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'O nome é obrigatório.',
-            'cpf.required' => 'O CPF é obrigatório.',
-            'cpf.size' => 'O CPF deve ter 11 caracteres.',
-            'cpf.unique' => 'Este CPF já está cadastrado.',
-            'birth_date.required' => 'A data de nascimento é obrigatória.',
-            'household_income.required' => 'A renda familiar é obrigatória.',
-            'household_income.numeric' => 'A renda familiar deve ser um número.',
-            'household_income.min' => 'A renda familiar não pode ser negativa.',
+            'name.required' => 'Name is required.',
+            'cpf.required' => 'CPF is required.',
+            'cpf.size' => 'CPF must be 11 characters.',
+            'cpf.unique' => 'This CPF is already registered.',
+            'birth_date.required' => 'Birth date is required.',
+            'household_income.required' => 'Household income is required.',
+            'household_income.numeric' => 'Household income must be a number.',
+            'household_income.min' => 'Household income cannot be negative.',
         ];
     }
 }
