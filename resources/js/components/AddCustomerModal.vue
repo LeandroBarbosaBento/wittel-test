@@ -72,7 +72,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import { storeCustomer } from '../service';
+import { storeCustomer } from '../services';
 import Notification from './Notification.vue';
 
 const props = defineProps({
