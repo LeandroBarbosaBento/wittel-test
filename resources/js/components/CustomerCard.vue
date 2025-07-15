@@ -1,12 +1,12 @@
 <template>
     <div class="relative">
-        <div class="bg-white rounded shadow-md border border-gray-200 my-8 p-4 flex justify-between items-center" >
-            <div>
+        <div class="bg-white rounded shadow-md border border-gray-200 my-8 p-4 flex flex-col sm:flex-row justify-between items-center gap-4" >
+            <div class="w-full sm:w-auto text-center sm:text-left">
                 <p class="font-semibold">{{ customer.name }}</p>
                 <p class="text-sm text-gray-600">CPF: {{ customer.cpf }}</p>
             </div>
             <span
-                class="min-w-20 p-1 font-semibold rounded-md flex items-center justify-center text-center text-sm"
+                class="min-w-20 p-1 font-semibold rounded-md flex items-center justify-center text-center text-sm w-full sm:w-auto"
                 :class="customerClass"
             >
                 {{

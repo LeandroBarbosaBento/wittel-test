@@ -1,20 +1,15 @@
 <template>
     <div class="max-w-6xl mx-auto p-6 mt-5">
-        <div class="flex justify-between items-center mb-8 border-b border-gray-200 py-4">
-            <h1 class="text-3xl font-bold">Customers</h1>
-            <button
-                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
-                @click="showModal = true"
-            >
-                + Add Customer
-            </button>
-
-            <button
-                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
-                @click="test"
-            >
-                test
-            </button>
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 border-b border-gray-200 py-4 gap-2">
+            <h1 class="text-3xl font-bold text-center sm:text-left">Customers</h1>
+            <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                <button
+                    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer w-full sm:w-auto"
+                    @click="showModal = true"
+                >
+                    + Add Customer
+                </button>
+            </div>
         </div>
 
         <div class="mb-6">
@@ -94,11 +89,6 @@ const onSearch = () => {
 const onChangePage = (newPage) => {
     pagination.value.currentPage = newPage;
     listCustomers();
-}
-
-function test() {
-    console.log(customers.value);
-    console.log(pagination.value);
 }
 
 const listCustomers = async () => {
