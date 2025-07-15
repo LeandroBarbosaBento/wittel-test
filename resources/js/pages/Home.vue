@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-6xl mx-auto p-6 mt-5">
+    <div class="max-w-6xl mx-auto px-6">
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 border-b border-gray-200 py-4 gap-2">
             <h1 class="text-3xl font-bold text-center sm:text-left">Customers</h1>
             <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
@@ -71,7 +71,7 @@ import { onMounted, ref } from 'vue';
 import AddCustomerModal from '../components/AddCustomerModal.vue';
 import Pagination from '../components/Pagination.vue';
 import CustomerCard from '../components/CustomerCard.vue';
-import { getCustomers } from '../service';
+import { getCustomers } from '../services';
 
 const showModal = ref(false);
 const searchTerm = ref("");
