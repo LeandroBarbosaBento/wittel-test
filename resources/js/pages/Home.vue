@@ -18,26 +18,31 @@
         </div>
 
         <div class="mb-6">
-            <form @submit.prevent="onSearch" class="flex gap-2 justify-end my-3">
+            <form
+                @submit.prevent="onSearch"
+                class="flex flex-col sm:flex-row gap-2 justify-end my-3 p-2 sm:p-0"
+            >
                 <input
                     v-model="searchTerm"
                     type="text"
                     placeholder="Search by name..."
-                    class="flex-1 border border-gray-300 px-3 py-2 rounded max-w-1/4"
+                    class="border border-gray-300 px-3 py-2 rounded w-full sm:w-1/4"
                 />
-                <button
-                    type="submit"
-                    class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 cursor-pointer"
-                >
-                    Search
-                </button>
-                <button
-                    type="button"
-                    class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 cursor-pointer"
-                    @click="searchTerm = ''; onSearch()"
-                >
-                    Clear
-                </button>
+                <div class="flex gap-2">
+                    <button
+                        type="submit"
+                        class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 cursor-pointer w-full sm:w-auto"
+                    >
+                        Search
+                    </button>
+                    <button
+                        type="button"
+                        class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 cursor-pointer w-full sm:w-auto"
+                        @click="searchTerm = ''; onSearch()"
+                    >
+                        Clear
+                    </button>
+                </div>
             </form>
         </div>
 
