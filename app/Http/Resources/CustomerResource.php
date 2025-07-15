@@ -16,11 +16,11 @@ class CustomerResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nome' => $this->name,
+            'name' => $this->name,
             'email' => $this->email,
-            'telefone' => $this->phone,
+            'phone' => $this->phone,
             'cpf' => $this->cpf,
-            'criado_em' => $this->created_at->format('Y-m-d H:i'),
+            'created_at' => $this->created_at->format('Y-m-d H:i'),
         ];
     }
 }
