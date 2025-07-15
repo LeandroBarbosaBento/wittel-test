@@ -21,6 +21,7 @@ class CustomerController extends Controller
             ->when($search, function ($query, $search) {
                 $query->where('name', 'like', "%{$search}%");
             })
+            ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         return CustomerResource::collection($customers);
