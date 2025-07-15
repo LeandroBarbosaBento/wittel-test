@@ -8,6 +8,13 @@
             >
                 + Add Customer
             </button>
+
+            <button
+                class="bg-red-600 text-white px-4 py-2 rounded hover:bg-blue-700 cursor-pointer"
+                @click="test"
+            >
+                test
+            </button>
         </div>
 
         <div class="mb-6">
@@ -20,9 +27,16 @@
                 />
                 <button
                     type="submit"
-                    class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800"
+                    class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 cursor-pointer"
                 >
                     Search
+                </button>
+                <button
+                    type="button"
+                    class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400 cursor-pointer"
+                    @click="searchTerm = ''; onSearch()"
+                >
+                    Clear
                 </button>
             </form>
         </div>
@@ -35,8 +49,8 @@
             />
             <pagination
                 @update:modelValue="onChangePage"
-                :model-value="1"
-                :total-pages="10"
+                :model-value="pagination.currentPage"
+                :total-pages="pagination.totalPages"
             />
 
         </div>
@@ -44,55 +58,61 @@
             No customers registered.
         </div>
 
-        <Modal
+        <add-customer-modal
             :show="showModal"
             @close="showModal = false"
+            @update-list="listCustomers"
         />
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import Modal from '../components/Modal.vue';
+import { onMounted, ref } from 'vue';
+import AddCustomerModal from '../components/AddCustomerModal.vue';
 import Pagination from '../components/Pagination.vue';
 import CustomerCard from '../components/CustomerCard.vue';
+import { getCustomers } from '../service';
 
 const showModal = ref(false);
 const searchTerm = ref("");
-const customers = ref([
-    {
-        name: "Nome do cliente",
-        cpf: "123456",
-        registeredAt: "10/06/2025",
-        household_income: 980,
-    },
-    {
-        name: "Nome do cliente",
-        cpf: "123456",
-        registeredAt: "10/06/2025",
-        household_income: 1000
-    },
-    {
-        name: "Nome do cliente",
-        cpf: "123456",
-        registeredAt: "10/06/2025",
-        household_income: 3000
-    },
-    {
-        name: "Nome do cliente",
-        cpf: "123456",
-        registeredAt: "10/06/2025",
-        household_income: 4000
-    }
-]);
+const customers = ref([]);
+const pagination = ref({
+    currentPage: 1,
+    totalPages: 1
+});
 
 const onSearch = () => {
-    console.log("onSearch");
-    console.log(searchTerm.value);
+    pagination.value.currentPage = 1;
+    listCustomers();
 }
 
 const onChangePage = (newPage) => {
-    console.log("onChangePage");
-    console.log(newPage);
+    pagination.value.currentPage = newPage;
+    listCustomers();
 }
+
+function test() {
+    console.log(customers.value);
+    console.log(pagination.value);
+}
+
+const listCustomers = async () => {
+    try {
+        const params = {
+            page: pagination.value.currentPage,
+            search: searchTerm.value
+        };
+        const data = await getCustomers(params);
+        customers.value = data.data;
+        pagination.value.currentPage = data.meta.current_page;
+        pagination.value.totalPages = data.meta.last_page;
+
+    } catch (error) {
+        console.error("Error fetching customers:", error);
+    }
+}
+
+onMounted(() => {
+    listCustomers();
+});
 </script>
