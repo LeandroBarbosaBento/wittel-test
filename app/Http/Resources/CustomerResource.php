@@ -17,10 +17,10 @@ class CustomerResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'email' => $this->email,
-            'phone' => $this->phone,
             'cpf' => $this->cpf,
-            'created_at' => $this->created_at->format('Y-m-d H:i'),
+            'birth_date' => $this->birth_date,
+            'created_at' => $this->created_at,
+            'household_income' => (float) $this->household_income,
         ];
     }
 }
