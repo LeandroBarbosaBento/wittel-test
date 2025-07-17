@@ -74,7 +74,7 @@ import CustomerCard from '../components/CustomerCard.vue';
 import { getCustomers } from '../services';
 
 const showModal = ref(false);
-const searchTerm = ref("");
+const searchTerm = ref(null);
 const customers = ref([]);
 const pagination = ref({
     currentPage: 1,
@@ -83,6 +83,7 @@ const pagination = ref({
 
 const onSearch = () => {
     pagination.value.currentPage = 1;
+    if(!searchTerm.value) searchTerm.value = null;
     listCustomers();
 }
 

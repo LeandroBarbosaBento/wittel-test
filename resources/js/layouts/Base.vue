@@ -15,7 +15,7 @@
                 </div>
             </div>
         </nav>
-        <main class="container mx-auto p-6">
+        <main class="container mx-auto p-2">
             <slot />
         </main>
         <footer class="bg-gray-800 text-white text-center p-4 mt-6">
