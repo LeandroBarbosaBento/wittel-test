@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'customers'], function () {
     Route::get('/', [\App\Http\Controllers\CustomerController::class, 'index']);
     Route::post('/', [\App\Http\Controllers\CustomerController::class, 'store']);
+    Route::get('/report', [\App\Http\Controllers\CustomerController::class, 'report']);
     Route::get('/{customer}', [\App\Http\Controllers\CustomerController::class, 'show']);
     Route::put('/{customer}', [\App\Http\Controllers\CustomerController::class, 'update']);
     Route::delete('/{customer}', [\App\Http\Controllers\CustomerController::class, 'destroy']);

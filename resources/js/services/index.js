@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-const API_URL = '/api/customers/';
-
 export const getCustomers = async (params) => {
-    const { data } = await axios.get(API_URL, {
+    const { data } = await axios.get("/api/customers/", {
         params: {
             page: params.page || 1,
             search: params.search || ''
@@ -13,6 +11,15 @@ export const getCustomers = async (params) => {
 }
 
 export const storeCustomer = async (params) => {
-    const { data } = await axios.post(API_URL, params);
+    const { data } = await axios.post("/api/customers/", params);
+    return data;
+}
+
+export const getReport = async (period) => {
+    const { data } = await axios.get("/api/customers/report",{
+        params: {
+            period: period
+        }
+    });
     return data;
 }
