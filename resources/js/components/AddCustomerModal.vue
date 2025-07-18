@@ -3,6 +3,7 @@
       v-if="show"
       class="fixed inset-1 flex justify-center items-center"
     >
+        <Loader v-if="isLoading" />
         <div class="bg-white rounded-lg shadow-2xl p-6 w-full max-w-md">
             <h2 class="text-xl font-bold mb-4">Add Customer</h2>
             <form @submit.prevent="addCustomer">
@@ -74,6 +75,7 @@
 import { ref } from 'vue';
 import { storeCustomer } from '../services';
 import Notification from './Notification.vue';
+import Loader from './Loader.vue';
 
 const props = defineProps({
     show: {
@@ -86,12 +88,13 @@ const notification = ref({
     type: "",
     message: ""
 })
+const isLoading = ref(false);
 
 const form = ref({
-    name: 'Customer 01',
-    cpf: '12345678911',
-    birthDate: '1997-03-06',
-    householdIncome: 500
+    name: '',
+    cpf: '',
+    birthDate: '',
+    householdIncome: 0
 })
 
 const addCustomer = async () => {
@@ -103,6 +106,7 @@ const addCustomer = async () => {
     }
 
     try {
+        isLoading.value = true;
         const data = await storeCustomer(newCustomer);
         console.log("Customer added:", data);
         resetForm();
@@ -120,6 +124,8 @@ const addCustomer = async () => {
             type: 'error',
             message: error.response.data.message || 'Failed to add customer.'
         };
+    } finally {
+        isLoading.value = false;
     }
 }
 

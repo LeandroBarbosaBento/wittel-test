@@ -1,5 +1,6 @@
 <template>
     <div class="max-w-6xl mx-auto px-6">
+        <Loader v-if="isLoading" />
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 border-b border-gray-200 py-4 gap-2">
             <h1 class="text-3xl font-bold text-center sm:text-left">Customers</h1>
             <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
@@ -72,6 +73,7 @@ import AddCustomerModal from '../components/AddCustomerModal.vue';
 import Pagination from '../components/Pagination.vue';
 import CustomerCard from '../components/CustomerCard.vue';
 import { getCustomers } from '../services';
+import Loader from "../components/Loader.vue";
 
 const showModal = ref(false);
 const searchTerm = ref(null);
@@ -80,6 +82,7 @@ const pagination = ref({
     currentPage: 1,
     totalPages: 1
 });
+const isLoading = ref(false);
 
 const onSearch = () => {
     pagination.value.currentPage = 1;
@@ -94,6 +97,7 @@ const onChangePage = (newPage) => {
 
 const listCustomers = async () => {
     try {
+        isLoading.value = true;
         const params = {
             page: pagination.value.currentPage,
             search: searchTerm.value
@@ -105,6 +109,8 @@ const listCustomers = async () => {
 
     } catch (error) {
         console.error("Error fetching customers:", error);
+    } finally {
+        isLoading.value = false;
     }
 }
 

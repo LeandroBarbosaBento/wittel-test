@@ -1,8 +1,9 @@
 <template>
     <div>
+        <Loader v-if="isLoading" />
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 border-b border-gray-200 py-4 gap-2">
             <h1 class="text-3xl font-bold text-center sm:text-left">Dashboard </h1>
-            <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto text-sm text-center font-semibold">
+            <div class="flex sm:flex-row gap-4  text-sm text-center font-semibold justify-end pr-5">
                 <span
                     :class="{
                         'border-b-3 border-orange-500 text-orange-500' : selectedPeriod === 'all'
@@ -92,17 +93,19 @@
 import { ref, watch } from "vue";
 import { getReport } from '../services';
 import ReportCard from "../components/ReportCard.vue";
+import Loader from "../components/Loader.vue";
 
 const selectedPeriod = ref("all");
-
 const avgIncome = ref(0);
 const countCustomersOverAvgIncome = ref(0);
 const countClassACustomers = ref(0);
 const countClassBCustomers = ref(0);
 const countClassCCustomers = ref(0);
+const isLoading = ref(false);
 
 const getData = async () => {
     try {
+        isLoading.value = true;
         const data = await getReport(selectedPeriod.value);
         countCustomersOverAvgIncome.value = data.adults_above_avg_income;
         avgIncome.value = data.avg_income;
@@ -112,6 +115,8 @@ const getData = async () => {
 
     } catch (error) {
         console.error(error);
+    } finally {
+        isLoading.value = false;
     }
 }
 
